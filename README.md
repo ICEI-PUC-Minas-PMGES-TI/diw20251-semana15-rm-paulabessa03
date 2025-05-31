@@ -9,15 +9,15 @@ Sugerimos o uso das seguintes ferramentas acessíveis: [FullCalendar](https://fu
 
 ## Informações do trabalho
 
-- Nome:
-- Matricula:
-- Proposta de projeto escolhida:
-- Breve descrição sobre seu projeto:
+- Nome:PAULA VITORIA BRAGA BESSA
+- Matricula: 880160 / CODIGO DE PESSOAL: 1557309
+- Proposta de projeto escolhida: PORTAL DE NOTICIAS
+- Breve descrição sobre seu projeto: MEU PROJETO E UM PORTAL DE NOTICIAS
 
 **Print da tela com a implementação**
 
-<< Coloque aqui uma breve explicação da implementação feita nessa etapa>>
+Foi criado um gráfico interativo usando Chart.js que mostra o número de notícias por categoria em diferentes meses. O usuário pode escolher o mês, trocar o tipo de gráfico entre barra e pizza, e baixar a imagem. Também foi simulada a alteração dos dados para demonstrar a atualização dinâmica do gráfico, simulando operações de CRUD.
 
-<<  COLOQUE A IMAGEM TELA 1 AQUI >>
+![alt text](image.png)
 
-<<  COLOQUE A IMAGEM TELA 2 AQUI >>
+![alt text](image-1.png)

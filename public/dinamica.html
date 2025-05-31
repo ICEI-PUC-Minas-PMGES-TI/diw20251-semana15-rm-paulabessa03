@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Notícias por Categoria - Interativo</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      text-align: center;
+      padding: 40px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    select, button {
+      padding: 10px 15px;
+      margin: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+    }
+
+    .grafico-container {
+      width: 90%;
+      max-width: 1000px;
+      height: 600px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📊 Notícias por Categoria</h1>
+
+  <label for="mes">Escolha o mês:</label>
+  <select id="mes">
+    <option value="maio">Maio</option>
+    <option value="junho">Junho</option>
+    <option value="julho">Julho</option>
+  </select>
+
+  <button onclick="baixarGrafico()">📥 Baixar Gráfico</button>
+  <button onclick="trocarTipoGrafico()">🔄 Trocar Tipo de Gráfico</button>
+
+  <div class="grafico-container">
+    <canvas id="graficoNoticias"></canvas>
+  </div>
+
+  <script>
+    const dadosPorMes = {
+      maio: [15, 8, 12, 6, 10],
+      junho: [10, 12, 7, 9, 13],
+      julho: [18, 5, 15, 4, 9]
+    };
+
+    const categorias = ['IA', 'Blockchain', 'Cibersegurança', 'Startups', 'Gadgets'];
+    let tipoAtual = 'bar';
+
+    const ctx = document.getElementById('graficoNoticias').getContext('2d');
+    let chart = criarGrafico(tipoAtual, dadosPorMes.maio);
+
+    document.getElementById('mes').addEventListener('change', function () {
+      const mesSelecionado = this.value;
+      chart.data.datasets[0].data = dadosPorMes[mesSelecionado];
+      chart.update();
+    });
+
+    function criarGrafico(tipo, dados) {
+      return new Chart(ctx, {
+        type: tipo,
+        data: {
+          labels: categorias,
+          datasets: [{
+            label: 'Notícias por Categoria',
+            data: dados,
+            backgroundColor: [
+              '#4bc0c0', '#ff9f40', '#9966ff', '#ff6384', '#36a2eb'
+            ],
+            borderColor: [
+              '#4bc0c0', '#ff9f40', '#9966ff', '#ff6384', '#36a2eb'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: {
+            duration: 1000,
+            easing: 'easeInOutQuad'
+          },
+          plugins: {
+            title: {
+              display: true,
+              text: 'Resumo Mensal de Publicações por Categoria'
+            },
+            tooltip: {
+              enabled: true,
+              callbacks: {
+                label: function (context) {
+                  return `${context.label}: ${context.parsed} notícias`;
+                }
+              }
+            },
+            legend: {
+              display: tipo === 'pie' ? true : false
+            }
+          },
+          scales: tipo === 'pie' ? {} : {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Quantidade de Notícias'
+              }
+            },
+            x: {
+              title: {
+                display: true,
+                text: 'Categorias'
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function trocarTipoGrafico() {
+      const mesSelecionado = document.getElementById('mes').value;
+      tipoAtual = tipoAtual === 'bar' ? 'pie' : 'bar';
+      chart.destroy();
+      chart = criarGrafico(tipoAtual, dadosPorMes[mesSelecionado]);
+    }
+
+    function baixarGrafico() {
+      const link = document.createElement('a');
+      link.download = 'grafico-noticias.png';
+      link.href = chart.toBase64Image();
+      link.click();
+    }
+  </script>
+
+</body>
+</html>
