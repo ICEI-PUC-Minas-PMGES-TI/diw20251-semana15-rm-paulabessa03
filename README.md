@@ -16,7 +16,7 @@ Sugerimos o uso das seguintes ferramentas acessíveis: [FullCalendar](https://fu
 
 **Print da tela com a implementação**
 
-Foi criado um gráfico interativo usando Chart.js que mostra o número de notícias por categoria em diferentes meses. O usuário pode escolher o mês, trocar o tipo de gráfico entre barra e pizza, e baixar a imagem. Também foi simulada a alteração dos dados para demonstrar a atualização dinâmica do gráfico, simulando operações de CRUD.
+Foi criado um gráfico interativo usando Chart.js que mostra o número de notícias por categoria em diferentes meses. O usuário pode escolher o mês, trocar o tipo de gráfico entre barra e pizza, e baixar a imagem. Também foi simulada a alteração dos dados para demonstrar a atualização dinâmica do gráfico, simulando operações de CRUD
 
 ![alt text](image.png)
 
